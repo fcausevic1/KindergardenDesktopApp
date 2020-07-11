@@ -208,6 +208,33 @@ public class Controller implements Initializable {
     }
 
     public void onParentDetails(ActionEvent actionEvent) {
+        if (childrenListView.getSelectionModel().getSelectedItem() == null) return;
+        Child selectedChild = childrenListView.getSelectionModel().getSelectedItem();
+        Stage stage = new Stage();
+        javafx.scene.Parent root;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/parent.fxml"));
+            ParentController parentController = new ParentController(selectedChild);
+            loader.setController(parentController);
+            root = loader.load();
+            stage.setTitle("Parents");
+            stage.setScene(new Scene(root));
+            stage.setMinWidth(355);
+            stage.setMaxWidth(355);
+            stage.setMinHeight(500);
+            stage.setMaxHeight(500);
+            stage.initOwner(childrenListView.getScene().getWindow());
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.show();
+            stage.setOnHiding(event -> {
+                if (selectedChild.getFirstParent() != null) {
+                    childParentTelephoneField.setText(selectedChild.getFirstParent().getTelephone());
+                    childParentNameField.setText(selectedChild.getFirstParent().toString());
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void onActivity(ActionEvent actionEvent) {

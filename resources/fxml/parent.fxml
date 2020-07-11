@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+          prefHeight="450.0" prefWidth="355.0" vgap="10.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
+          xmlns:fx="http://javafx.com/fxml/1">
+    <rowConstraints>
+        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints minHeight="10.0" vgrow="NEVER"/>
+        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS"/>
+    </rowConstraints>
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS" maxWidth="-Infinity" minWidth="125.0" prefWidth="125.0"/>
+        <ColumnConstraints hgrow="ALWAYS" maxWidth="-Infinity" minWidth="200.0" prefWidth="200.0"/>
+    </columnConstraints>
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+    </padding>
+    <Label text="First Name:" GridPane.rowIndex="1"/>
+    <Label text="Last Name:" GridPane.rowIndex="2"/>
+    <Label text="Telephone:" GridPane.rowIndex="3"/>
+    <Label text="Date of Birth:" GridPane.rowIndex="5"/>
+    <Label text="Address:" GridPane.rowIndex="6"/>
+    <Label text="Place of Birth:" GridPane.rowIndex="7"/>
+    <Label text="Gender:" GridPane.rowIndex="8"/>
+    <Label text="JMBG:" GridPane.rowIndex="9"/>
+    <Label text="Email:" GridPane.rowIndex="4"/>
+    <TextField fx:id="firstNameField" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1"
+               GridPane.rowIndex="1"/>
+    <TextField fx:id="lastNameField" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1"
+               GridPane.rowIndex="2"/>
+    <TextField fx:id="telephoneField" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1"
+               GridPane.rowIndex="3"/>
+    <TextField fx:id="emailField" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+    <DatePicker fx:id="dateField" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+    <TextField fx:id="addressField" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+    <TextField fx:id="birthplaceField" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1"
+               GridPane.rowIndex="7"/>
+    <ChoiceBox fx:id="genderChoiceBox" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1"
+               GridPane.rowIndex="8"/>
+    <TextField fx:id="JMBGField" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
+    <HBox alignment="CENTER" GridPane.columnSpan="2147483647" GridPane.rowIndex="10">
+        <Button mnemonicParsing="false" onAction="#onSaveChanges" prefHeight="25.0" prefWidth="125.0"
+                text="Save and Close"/>
+    </HBox>
+    <Label text="Parent:"/>
+    <ChoiceBox fx:id="parentChoiceBox" prefWidth="220.0" GridPane.columnIndex="1"/>
+
+
+</GridPane>
