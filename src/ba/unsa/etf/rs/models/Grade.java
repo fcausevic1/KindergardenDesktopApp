@@ -36,7 +36,7 @@ public class Grade {
         return name;
     }
 
-    public Person getTeacher() {
+    public Teacher getTeacher() {
         return teacher.get();
     }
 

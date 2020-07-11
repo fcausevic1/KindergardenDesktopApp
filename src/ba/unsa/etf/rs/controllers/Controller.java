@@ -175,14 +175,67 @@ public class Controller implements Initializable {
 
         teacherFirstNameField.textProperty().addListener((observableValue, oldValue, newValue) -> teachersListView.refresh());
         teacherLastNameField.textProperty().addListener((observableValue, oldValue, newValue) -> teachersListView.refresh());
-
-
     }
 
     public void onAddGrade(ActionEvent actionEvent) {
+        Stage stage = new Stage();
+        javafx.scene.Parent root;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/grade.fxml"));
+            GradeController gradeController = new GradeController(null, getChildrenWithoutClass(), teachers);
+            loader.setController(gradeController);
+            root = loader.load();
+            stage.setTitle("Grade");
+            stage.setScene(new Scene(root));
+            stage.setMinWidth(800);
+            stage.setMaxWidth(800);
+            stage.setMinHeight(500);
+            stage.setMaxHeight(500);
+            stage.initOwner(childrenListView.getScene().getWindow());
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.show();
+            stage.setOnHiding(event -> {
+                Grade grade = gradeController.getGrade();
+                if (grade != null) {
+                    grades.add(grade);
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void onEditGrade(ActionEvent actionEvent) {
+        if (gradesTableView.getSelectionModel().getSelectedItem() == null) return;
+        Grade selectedGrade = gradesTableView.getSelectionModel().getSelectedItem();
+        Stage stage = new Stage();
+        javafx.scene.Parent root;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/grade.fxml"));
+            GradeController gradeController = new GradeController(selectedGrade, getChildrenWithoutClass(), teachers);
+            loader.setController(gradeController);
+            root = loader.load();
+            stage.setTitle("Grade");
+            stage.setScene(new Scene(root));
+            stage.setMinWidth(800);
+            stage.setMaxWidth(800);
+            stage.setMinHeight(500);
+            stage.setMaxHeight(500);
+            stage.initOwner(childrenListView.getScene().getWindow());
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.show();
+            stage.setOnHiding(event -> {
+                Grade grade = gradeController.getGrade();
+                if (grade != null) {
+                    gradesTableView.getSelectionModel().getSelectedItem().setChildren(grade.getChildren());
+                    gradesTableView.getSelectionModel().getSelectedItem().setName(grade.getName());
+                    gradesTableView.getSelectionModel().getSelectedItem().setTeacher(grade.getTeacher());
+                    gradesTableView.refresh();
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void onDeleteGrade(ActionEvent actionEvent) {
@@ -260,5 +313,20 @@ public class Controller implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    ObservableList<Child> getChildrenWithoutClass() {
+        ObservableList<Child> newList = FXCollections.observableArrayList();
+        for (Child child : children) {
+            boolean contains = false;
+            for (Grade grade : grades) {
+                if (grade.getChildren().contains(child)) {
+                    contains = true;
+                    break;
+                }
+            }
+            if (!contains) newList.add(child);
+        }
+        return newList;
     }
 }
