@@ -1,5 +1,6 @@
 package ba.unsa.etf.rs;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.time.LocalDate;
@@ -10,7 +11,7 @@ public class User {
     private final SimpleStringProperty address;
     private final SimpleStringProperty jmbg;
     private final SimpleStringProperty placeOfBirth;
-    private LocalDate dateOfBirth;
+    private final SimpleObjectProperty<LocalDate> dateOfBirth;
     private Gender gender;
 
     public User() {
@@ -19,6 +20,7 @@ public class User {
         this.address = new SimpleStringProperty("");
         this.jmbg = new SimpleStringProperty("");
         this.placeOfBirth = new SimpleStringProperty("");
+        this.dateOfBirth = new SimpleObjectProperty<>(LocalDate.now());
     }
 
     public User(String firstName, String lastName, String address, String jmbg, String placeOfBirth, LocalDate dateOfBirth, Gender gender) {
@@ -27,7 +29,7 @@ public class User {
         this.address = new SimpleStringProperty(address);
         this.jmbg = new SimpleStringProperty(jmbg);
         this.placeOfBirth = new SimpleStringProperty(placeOfBirth);
-        this.dateOfBirth = dateOfBirth;
+        this.dateOfBirth = new SimpleObjectProperty<>(dateOfBirth);
         this.gender = gender;
     }
 
@@ -92,11 +94,15 @@ public class User {
     }
 
     public LocalDate getDateOfBirth() {
+        return dateOfBirth.get();
+    }
+
+    public SimpleObjectProperty<LocalDate> dateOfBirthProperty() {
         return dateOfBirth;
     }
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+        this.dateOfBirth.set(dateOfBirth);
     }
 
     public Gender getGender() {
