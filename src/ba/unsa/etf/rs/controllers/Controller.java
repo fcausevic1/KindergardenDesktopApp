@@ -1,5 +1,10 @@
-package ba.unsa.etf.rs;
+package ba.unsa.etf.rs.controllers;
 
+import ba.unsa.etf.rs.enums.Gender;
+import ba.unsa.etf.rs.models.Child;
+import ba.unsa.etf.rs.models.Grade;
+import ba.unsa.etf.rs.models.Parent;
+import ba.unsa.etf.rs.models.Teacher;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -58,6 +63,10 @@ public class Controller implements Initializable {
         teacherColumn.setCellValueFactory(grade -> grade.getValue().teacherProperty());
         childrenColumn.setCellValueFactory(grade -> new SimpleStringProperty(String.valueOf(grade.getValue().getChildren().size())));
 
+        //Parent fields
+        childParentNameField.setEditable(false);
+        childParentTelephoneField.setEditable(false);
+
         //Test items
         Teacher teacher1 = new Teacher();
         teacher1.setFirstName("Teacher");
@@ -67,9 +76,14 @@ public class Controller implements Initializable {
         teacher2.setFirstName("Teacher");
         teacher2.setLastName("Two");
         teachers.add(teacher2);
+        Parent parent1 = new Parent();
+        parent1.setFirstName("Parent");
+        parent1.setLastName("One");
+        parent1.setTelephone("000/000-000");
         Child child1 = new Child();
         child1.setFirstName("Child");
         child1.setLastName("One");
+        child1.setFirstParent(parent1);
         child1.setGender(Gender.FEMALE);
         children.add(child1);
         Grade grade1 = new Grade();
@@ -151,6 +165,10 @@ public class Controller implements Initializable {
             }
         });
 
+        teacherFirstNameField.textProperty().addListener((observableValue, oldValue, newValue) -> teachersListView.refresh());
+        teacherLastNameField.textProperty().addListener((observableValue, oldValue, newValue) -> teachersListView.refresh());
+
+
     }
 
     public void onAddGrade(ActionEvent actionEvent) {
@@ -160,18 +178,25 @@ public class Controller implements Initializable {
     }
 
     public void onDeleteGrade(ActionEvent actionEvent) {
+        grades.removeAll(gradesTableView.getSelectionModel().getSelectedItem());
     }
 
     public void onAddTeacher(ActionEvent actionEvent) {
+        teachers.add(new Teacher());
+        teachersListView.getSelectionModel().selectLast();
     }
 
     public void onDeleteTeacher(ActionEvent actionEvent) {
+        teachers.removeAll(teachersListView.getSelectionModel().getSelectedItem());
     }
 
     public void onAddChild(ActionEvent actionEvent) {
+        children.add(new Child());
+        childrenListView.getSelectionModel().selectLast();
     }
 
     public void onDeleteChild(ActionEvent actionEvent) {
+        children.removeAll(childrenListView.getSelectionModel().getSelectedItems());
     }
 
     public void onParentDetails(ActionEvent actionEvent) {

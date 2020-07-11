@@ -1,5 +1,6 @@
-package ba.unsa.etf.rs;
+package ba.unsa.etf.rs.models;
 
+import ba.unsa.etf.rs.enums.Gender;
 import javafx.beans.property.SimpleObjectProperty;
 
 import java.time.LocalDate;

@@ -1,19 +1,20 @@
-package ba.unsa.etf.rs;
+package ba.unsa.etf.rs.models;
 
+import ba.unsa.etf.rs.enums.Gender;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.time.LocalDate;
 
-public class Teacher extends Person {
+public class Parent extends Person {
     private final SimpleStringProperty email, telephone;
 
-    public Teacher() {
+    public Parent() {
         super();
         this.email = new SimpleStringProperty("");
         this.telephone = new SimpleStringProperty("");
     }
 
-    public Teacher(int id, String firstName, String lastName, String address, String jmbg, String placeOfBirth, LocalDate dateOfBirth, Gender gender, String email, String telephone) {
+    public Parent(int id, String firstName, String lastName, String address, String jmbg, String placeOfBirth, LocalDate dateOfBirth, Gender gender, String email, String telephone) {
         super(id, firstName, lastName, address, jmbg, placeOfBirth, dateOfBirth, gender);
         this.email = new SimpleStringProperty(email);
         this.telephone = new SimpleStringProperty(telephone);

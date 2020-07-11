@@ -1,4 +1,4 @@
-package ba.unsa.etf.rs;
+package ba.unsa.etf.rs.enums;
 
 public enum Gender {
     MALE, FEMALE;
