@@ -13,7 +13,7 @@ public class Person {
     private final SimpleStringProperty jmbg;
     private final SimpleStringProperty placeOfBirth;
     private final SimpleObjectProperty<LocalDate> dateOfBirth;
-    private Gender gender;
+    private final SimpleObjectProperty<Gender> gender;
 
     public Person() {
         this.id = -1;
@@ -23,6 +23,7 @@ public class Person {
         this.jmbg = new SimpleStringProperty("");
         this.placeOfBirth = new SimpleStringProperty("");
         this.dateOfBirth = new SimpleObjectProperty<>(LocalDate.now());
+        this.gender = new SimpleObjectProperty<>(Gender.MALE);
     }
 
     public Person(int id, String firstName, String lastName, String address, String jmbg, String placeOfBirth, LocalDate dateOfBirth, Gender gender) {
@@ -33,7 +34,7 @@ public class Person {
         this.jmbg = new SimpleStringProperty(jmbg);
         this.placeOfBirth = new SimpleStringProperty(placeOfBirth);
         this.dateOfBirth = new SimpleObjectProperty<>(dateOfBirth);
-        this.gender = gender;
+        this.gender = new SimpleObjectProperty<>(gender);
     }
 
     public int getId() {
@@ -117,11 +118,15 @@ public class Person {
     }
 
     public Gender getGender() {
+        return gender.get();
+    }
+
+    public SimpleObjectProperty<Gender> genderProperty() {
         return gender;
     }
 
     public void setGender(Gender gender) {
-        this.gender = gender;
+        this.gender.set(gender);
     }
 
     @Override

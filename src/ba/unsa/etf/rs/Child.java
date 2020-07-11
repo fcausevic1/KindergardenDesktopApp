@@ -23,7 +23,7 @@ public class Child extends Person {
         this.activities = activities;
     }
 
-    public Person getFirstParent() {
+    public Parent getFirstParent() {
         return firstParent.get();
     }
 
@@ -35,7 +35,7 @@ public class Child extends Person {
         this.firstParent.set(firstParent);
     }
 
-    public Person getSecondParent() {
+    public Parent getSecondParent() {
         return secondParent.get();
     }
 
