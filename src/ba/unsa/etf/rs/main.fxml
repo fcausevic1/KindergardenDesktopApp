@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="550.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
+            fx:controller="ba.unsa.etf.rs.Controller">
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <Tab text="Grades">
+                <GridPane hgap="10.0" vgap="10.0">
+                    <rowConstraints>
+                        <RowConstraints maxHeight="-Infinity" vgrow="NEVER"/>
+                        <RowConstraints maxHeight="-Infinity" vgrow="NEVER"/>
+                        <RowConstraints maxHeight="-Infinity" vgrow="NEVER"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS"/>
+                    </rowConstraints>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308"/>
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="125.0" minWidth="125.0" prefWidth="125.0"/>
+                    </columnConstraints>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <TableView fx:id="gradesTableView" GridPane.hgrow="SOMETIMES" GridPane.rowSpan="2147483647"
+                               GridPane.vgrow="SOMETIMES">
+                        <columns>
+                            <TableColumn prefWidth="75.0" text="Grade"/>
+                            <TableColumn prefWidth="75.0" text="Teacher"/>
+                            <TableColumn prefWidth="75.0" text="Children"/>
+                        </columns>
+                    </TableView>
+                    <Button mnemonicParsing="false" onAction="#onAddGrade" prefHeight="25.0" prefWidth="125.0"
+                            text="Add Grade" GridPane.columnIndex="1"/>
+                    <Button mnemonicParsing="false" onAction="#onEditGrade" prefHeight="25.0" prefWidth="125.0"
+                            text="Edit Grade" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    <Button mnemonicParsing="false" onAction="#onDeleteGrade" prefHeight="25.0" prefWidth="125.0"
+                            text="Delete Grade" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                </GridPane>
+            </Tab>
+            <Tab text="Teachers">
+                <GridPane hgap="10.0" vgap="10.0">
+                    <rowConstraints>
+                        <RowConstraints vgrow="NEVER"/>
+                        <RowConstraints vgrow="NEVER"/>
+                        <RowConstraints vgrow="NEVER"/>
+                        <RowConstraints vgrow="NEVER"/>
+                        <RowConstraints vgrow="NEVER"/>
+                        <RowConstraints vgrow="NEVER"/>
+                        <RowConstraints vgrow="NEVER"/>
+                        <RowConstraints vgrow="NEVER"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER"/>
+                        <RowConstraints vgrow="NEVER"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS"/>
+                    </rowConstraints>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308"/>
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="-Infinity" minWidth="125.0" prefWidth="125.0"/>
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="-Infinity" minWidth="200.0" prefWidth="200.0"/>
+                    </columnConstraints>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <ListView fx:id="teachersListView" GridPane.rowSpan="2147483647"/>
+                    <Label text="First Name:" GridPane.columnIndex="1"/>
+                    <Label text="Last Name:" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    <Label text="Telephone:" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    <Label text="Email:" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                    <Label text="Date of Birth:" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                    <Label text="Address:" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                    <Label text="Place of Birth:" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+                    <Label text="Gender:" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+                    <Label text="JMBG:" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+                    <TextField fx:id="teacherFirstNameField" prefHeight="25.0" prefWidth="200.0"
+                               GridPane.columnIndex="2"/>
+                    <TextField fx:id="teacherLastNameField" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="2"
+                               GridPane.rowIndex="1"/>
+                    <TextField fx:id="teacherTelephoneField" prefHeight="25.0" prefWidth="200.0"
+                               GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                    <TextField fx:id="teacherEmailField" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="2"
+                               GridPane.rowIndex="3"/>
+                    <DatePicker fx:id="teacherDateField" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="2"
+                                GridPane.rowIndex="4"/>
+                    <TextField fx:id="teacherAddressField" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="2"
+                               GridPane.rowIndex="5"/>
+                    <TextField fx:id="teacherBirthplaceField" prefHeight="25.0" prefWidth="200.0"
+                               GridPane.columnIndex="2" GridPane.rowIndex="6"/>
+                    <ChoiceBox fx:id="teacherGenderChoiceBox" prefHeight="25.0" prefWidth="200.0"
+                               GridPane.columnIndex="2" GridPane.rowIndex="7"/>
+                    <TextField fx:id="teacherJMBGField" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="2"
+                               GridPane.rowIndex="8"/>
+                    <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="2147483647"
+                          GridPane.rowIndex="9">
+                        <Button mnemonicParsing="false" onAction="#onAddTeacher" prefHeight="25.0" prefWidth="125.0"
+                                text="Add Teacher"/>
+                        <Button mnemonicParsing="false" onAction="#onDeleteTeacher" prefHeight="25.0" prefWidth="125.0"
+                                text="Delete Teacher">
+                            <HBox.margin>
+                                <Insets left="10.0"/>
+                            </HBox.margin>
+                        </Button>
+                    </HBox>
+                </GridPane>
+            </Tab>
+            <Tab text="Children">
+                <GridPane hgap="10.0" vgap="10.0">
+                    <rowConstraints>
+                        <RowConstraints vgrow="NEVER"/>
+                        <RowConstraints vgrow="NEVER"/>
+                        <RowConstraints vgrow="NEVER"/>
+                        <RowConstraints vgrow="NEVER"/>
+                        <RowConstraints vgrow="NEVER"/>
+                        <RowConstraints vgrow="NEVER"/>
+                        <RowConstraints vgrow="NEVER"/>
+                        <RowConstraints vgrow="NEVER"/>
+                        <RowConstraints vgrow="NEVER"/>
+                        <RowConstraints vgrow="NEVER"/>
+                        <RowConstraints vgrow="NEVER"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS"/>
+                    </rowConstraints>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308"/>
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="-Infinity" minWidth="125.0" prefWidth="125.0"/>
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="-Infinity" minWidth="200.0" prefWidth="200.0"/>
+                    </columnConstraints>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <ListView fx:id="childrenListView" GridPane.rowSpan="2147483647"/>
+                    <Label text="First Name:" GridPane.columnIndex="1"/>
+                    <Label text="Last Name:" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    <Label text="Parent Name:" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    <Label text="Parent Telephone:" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                    <Label text="Date of Birth:" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                    <Label text="Address:" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                    <Label text="Place of Birth:" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+                    <Label text="Gender:" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+                    <Label text="JMBG:" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+                    <TextField fx:id="childFirstNameField" prefHeight="25.0" prefWidth="200.0"
+                               GridPane.columnIndex="2"/>
+                    <TextField fx:id="childLastNameField" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="2"
+                               GridPane.rowIndex="1"/>
+                    <TextField fx:id="childParentNameField" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="2"
+                               GridPane.rowIndex="2"/>
+                    <TextField fx:id="childParentTelephoneField" prefHeight="25.0" prefWidth="200.0"
+                               GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                    <DatePicker fx:id="childDateField" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="2"
+                                GridPane.rowIndex="4"/>
+                    <TextField fx:id="childAddressField" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="2"
+                               GridPane.rowIndex="5"/>
+                    <TextField fx:id="childBirthplaceField" GridPane.columnIndex="2" GridPane.rowIndex="6"/>
+                    <ChoiceBox fx:id="childGenderField" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="2"
+                               GridPane.rowIndex="7"/>
+                    <TextField fx:id="childJMBGField" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="2"
+                               GridPane.rowIndex="8"/>
+                    <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="2147483647"
+                          GridPane.rowIndex="9">
+                        <Button mnemonicParsing="false" onAction="#onAddChild" prefHeight="25.0" prefWidth="110.0"
+                                text="Add Child"/>
+                        <Button mnemonicParsing="false" onAction="#onDeleteChild" prefHeight="25.0" prefWidth="110.0"
+                                text="Delete Child">
+                            <HBox.margin>
+                                <Insets left="10.0"/>
+                            </HBox.margin>
+                        </Button>
+                    </HBox>
+                    <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="2147483647"
+                          GridPane.rowIndex="10">
+                        <Button mnemonicParsing="false" onAction="#onParentDetails" prefHeight="25.0" prefWidth="110.0"
+                                text="Parent Details"/>
+                        <Button mnemonicParsing="false" onAction="#onActivity" prefHeight="25.0" prefWidth="110.0"
+                                text="Activity">
+                            <HBox.margin>
+                                <Insets left="10.0"/>
+                            </HBox.margin>
+                        </Button>
+                    </HBox>
+                </GridPane>
+            </Tab>
+        </TabPane>
+    </center>
+</BorderPane>
