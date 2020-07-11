@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Child extends Person {
-    private final SimpleObjectProperty<Person> firstParent, secondParent;
+    private final SimpleObjectProperty<Parent> firstParent, secondParent;
     private ArrayList<Activity> activities;
 
     public Child() {
@@ -16,7 +16,7 @@ public class Child extends Person {
         this.secondParent = new SimpleObjectProperty<>();
     }
 
-    public Child(int id, String firstName, String lastName, String address, String jmbg, String placeOfBirth, LocalDate dateOfBirth, Gender gender, Person firstParent, Person secondParent, ArrayList<Activity> activities) {
+    public Child(int id, String firstName, String lastName, String telephone, String address, String jmbg, String placeOfBirth, LocalDate dateOfBirth, Gender gender, Parent firstParent, Parent secondParent, ArrayList<Activity> activities) {
         super(id, firstName, lastName, address, jmbg, placeOfBirth, dateOfBirth, gender);
         this.firstParent = new SimpleObjectProperty<>(firstParent);
         this.secondParent = new SimpleObjectProperty<>(secondParent);
@@ -27,11 +27,11 @@ public class Child extends Person {
         return firstParent.get();
     }
 
-    public SimpleObjectProperty<Person> firstParentProperty() {
+    public SimpleObjectProperty<Parent> firstParentProperty() {
         return firstParent;
     }
 
-    public void setFirstParent(Person firstParent) {
+    public void setFirstParent(Parent firstParent) {
         this.firstParent.set(firstParent);
     }
 
@@ -39,11 +39,11 @@ public class Child extends Person {
         return secondParent.get();
     }
 
-    public SimpleObjectProperty<Person> secondParentProperty() {
+    public SimpleObjectProperty<Parent> secondParentProperty() {
         return secondParent;
     }
 
-    public void setSecondParent(Person secondParent) {
+    public void setSecondParent(Parent secondParent) {
         this.secondParent.set(secondParent);
     }
 

@@ -13,20 +13,19 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
     //Observables
     private final ObservableList<Gender> genders = FXCollections.observableArrayList(Gender.values());
-    private final ObservableList<Person> teachers = FXCollections.observableArrayList();
+    private final ObservableList<Teacher> teachers = FXCollections.observableArrayList();
     private final ObservableList<Child> children = FXCollections.observableArrayList();
     private final ObservableList<Grade> grades = FXCollections.observableArrayList();
     public TableView<Grade> gradesTableView;
     public TextField teacherFirstNameField;
     public TextField teacherLastNameField;
     public TextField teacherTelephoneField;
-    public TextField teacherEmailField;
     public TextField teacherBirthplaceField;
     public TextField teacherAddressField;
     public TextField teacherJMBGField;
     public DatePicker teacherDateField;
     public TableColumn<Grade, String> gradeColumn;
-    public TableColumn<Grade, Person> teacherColumn;
+    public TableColumn<Grade, Teacher> teacherColumn;
     public TextField childFirstNameField;
     public TextField childLastNameField;
     public TextField childParentNameField;
@@ -36,7 +35,7 @@ public class Controller implements Initializable {
     public TextField childBirthplaceField;
     public TableColumn<Grade, String> childrenColumn;
     public TextField childJMBGField;
-    public ListView<Person> teachersListView;
+    public ListView<Teacher> teachersListView;
     public ChoiceBox<Gender> teacherGenderChoiceBox;
     public ListView<Child> childrenListView;
     public ChoiceBox<Gender> childGenderChoiceBox;
@@ -58,7 +57,7 @@ public class Controller implements Initializable {
         childrenColumn.setCellValueFactory(grade -> new SimpleStringProperty(String.valueOf(grade.getValue().getChildren().size())));
 
         //Test items
-        Person teacher1 = new Person();
+        Teacher teacher1 = new Teacher();
         teacher1.setFirstName("Teacher");
         teacher1.setLastName("One");
         teachers.add(teacher1);
