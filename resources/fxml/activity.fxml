@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane xmlns:fx="http://javafx.com/fxml/1" hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity"
+          minHeight="-Infinity"
+          minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" vgap="10.0"
+          xmlns="http://javafx.com/javafx/10.0.2-internal"
+          fx:controller="ba.unsa.etf.rs.controllers.ActivityController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES"/>
+        <ColumnConstraints hgrow="NEVER" minWidth="125.0" prefWidth="125.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="200.0" prefWidth="200.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+    </padding>
+    <ListView fx:id="activityListView" prefHeight="200.0" prefWidth="200.0" GridPane.rowSpan="2147483647"/>
+    <TextField fx:id="assignmentField" prefHeight="25.0" prefWidth="125.0" GridPane.columnIndex="2"/>
+    <TextArea fx:id="descriptionField" prefHeight="100.0" prefWidth="125.0" GridPane.columnIndex="2"
+              GridPane.rowIndex="2"/>
+    <TextArea fx:id="reviewField" prefHeight="100.0" prefWidth="125.0" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+    <Label text="Assignment:" GridPane.columnIndex="1"/>
+    <Label text="Description:" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    <Label text="Teacher review:" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+    <Label text="Teacher:" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <ChoiceBox fx:id="teacherChoiceBox" prefHeight="25.0" prefWidth="220.0" GridPane.columnIndex="2"
+               GridPane.rowIndex="1"/>
+    <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="4"
+          GridPane.vgrow="NEVER">
+        <Button mnemonicParsing="false" onAction="#onAddActivity" prefHeight="25.0" prefWidth="125.0"
+                text="Add Activity"/>
+        <Button mnemonicParsing="false" onAction="#onDeleteActivity" prefHeight="25.0" prefWidth="125.0"
+                text="Delete Activity">
+            <HBox.margin>
+                <Insets left="10.0"/>
+            </HBox.margin>
+        </Button>
+    </HBox>
+    <Button mnemonicParsing="false" onAction="#onClose" prefHeight="25.0" prefWidth="125.0" text="Close"
+            GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER"
+            GridPane.rowIndex="5"/>
+</GridPane>
