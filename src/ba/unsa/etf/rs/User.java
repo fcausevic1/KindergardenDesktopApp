@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 import java.time.LocalDate;
 
 public class User {
+    int id;
     private final SimpleStringProperty firstName;
     private final SimpleStringProperty lastName;
     private final SimpleStringProperty address;
@@ -15,6 +16,7 @@ public class User {
     private Gender gender;
 
     public User() {
+        this.id = -1;
         this.firstName = new SimpleStringProperty("");
         this.lastName = new SimpleStringProperty("");
         this.address = new SimpleStringProperty("");
@@ -23,7 +25,8 @@ public class User {
         this.dateOfBirth = new SimpleObjectProperty<>(LocalDate.now());
     }
 
-    public User(String firstName, String lastName, String address, String jmbg, String placeOfBirth, LocalDate dateOfBirth, Gender gender) {
+    public User(int id, String firstName, String lastName, String address, String jmbg, String placeOfBirth, LocalDate dateOfBirth, Gender gender) {
+        this.id = id;
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
         this.address = new SimpleStringProperty(address);
@@ -31,6 +34,14 @@ public class User {
         this.placeOfBirth = new SimpleStringProperty(placeOfBirth);
         this.dateOfBirth = new SimpleObjectProperty<>(dateOfBirth);
         this.gender = gender;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {
