@@ -2,17 +2,19 @@ package ba.unsa.etf.rs.models;
 
 import ba.unsa.etf.rs.enums.Gender;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Child extends Person {
     private final SimpleObjectProperty<Parent> firstParent, secondParent;
-    private ArrayList<Activity> activities;
+    private ObservableList<Activity> activities;
 
     public Child() {
         super();
-        this.activities = new ArrayList<>();
+        this.activities = FXCollections.observableArrayList();
         this.firstParent = new SimpleObjectProperty<>();
         this.secondParent = new SimpleObjectProperty<>();
     }
@@ -21,7 +23,7 @@ public class Child extends Person {
         super(id, firstName, lastName, address, jmbg, placeOfBirth, dateOfBirth, gender);
         this.firstParent = new SimpleObjectProperty<>(firstParent);
         this.secondParent = new SimpleObjectProperty<>(secondParent);
-        this.activities = activities;
+        this.activities = FXCollections.observableArrayList(activities);
     }
 
     public Parent getFirstParent() {
@@ -48,11 +50,11 @@ public class Child extends Person {
         this.secondParent.set(secondParent);
     }
 
-    public ArrayList<Activity> getActivities() {
+    public ObservableList<Activity> getActivities() {
         return activities;
     }
 
-    public void setActivities(ArrayList<Activity> activities) {
+    public void setActivities(ObservableList<Activity> activities) {
         this.activities = activities;
     }
 

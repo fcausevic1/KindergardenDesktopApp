@@ -2,24 +2,26 @@ package ba.unsa.etf.rs.models;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
 public class Grade {
     private final SimpleStringProperty name;
     private final SimpleObjectProperty<Teacher> teacher;
-    private ArrayList<Child> children;
+    private ObservableList<Child> children;
 
     public Grade() {
         this.name = new SimpleStringProperty("");
         this.teacher = new SimpleObjectProperty<>();
-        this.children = new ArrayList<>();
+        this.children = FXCollections.observableArrayList();
     }
 
     public Grade(String name, Teacher teacher, ArrayList<Child> children) {
         this.name = new SimpleStringProperty(name);
         this.teacher = new SimpleObjectProperty<>(teacher);
-        this.children = children;
+        this.children = FXCollections.observableArrayList(children);
     }
 
     public String getName() {
@@ -46,11 +48,11 @@ public class Grade {
         return teacher;
     }
 
-    public ArrayList<Child> getChildren() {
+    public ObservableList<Child> getChildren() {
         return children;
     }
 
-    public void setChildren(ArrayList<Child> children) {
+    public void setChildren(ObservableList<Child> children) {
         this.children = children;
     }
 
