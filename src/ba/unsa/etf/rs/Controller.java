@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -39,6 +40,7 @@ public class Controller implements Initializable {
     public ChoiceBox<Gender> teacherGenderChoiceBox;
     public ListView<Child> childrenListView;
     public ChoiceBox<Gender> childGenderChoiceBox;
+    public TextField teacherEmailField;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -61,15 +63,93 @@ public class Controller implements Initializable {
         teacher1.setFirstName("Teacher");
         teacher1.setLastName("One");
         teachers.add(teacher1);
+        Teacher teacher2 = new Teacher();
+        teacher2.setFirstName("Teacher");
+        teacher2.setLastName("Two");
+        teachers.add(teacher2);
         Child child1 = new Child();
         child1.setFirstName("Child");
         child1.setLastName("One");
+        child1.setGender(Gender.FEMALE);
         children.add(child1);
         Grade grade1 = new Grade();
         grade1.setName("Grade One");
         grade1.setTeacher(teacher1);
         grade1.getChildren().add(child1);
         grades.add(grade1);
+
+        //Bindings
+        childrenListView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (oldValue != null) {
+                childFirstNameField.textProperty().unbindBidirectional(oldValue.firstNameProperty());
+                childLastNameField.textProperty().unbindBidirectional(oldValue.lastNameProperty());
+                childDateField.valueProperty().unbindBidirectional(oldValue.dateOfBirthProperty());
+                childBirthplaceField.textProperty().unbindBidirectional(oldValue.placeOfBirthProperty());
+                childJMBGField.textProperty().unbindBidirectional(oldValue.jmbgProperty());
+                childAddressField.textProperty().unbindBidirectional(oldValue.addressProperty());
+                childGenderChoiceBox.valueProperty().unbindBidirectional(oldValue.genderProperty());
+                childParentTelephoneField.setText("");
+                childParentNameField.setText("");
+            }
+            if (newValue == null) {
+                childFirstNameField.setText("");
+                childLastNameField.setText("");
+                childDateField.setValue(LocalDate.now());
+                childParentTelephoneField.setText("");
+                childBirthplaceField.setText("");
+                childJMBGField.setText("");
+                childAddressField.setText("");
+                childParentNameField.setText("");
+                childGenderChoiceBox.getSelectionModel().selectFirst();
+            } else {
+                childFirstNameField.textProperty().bindBidirectional(newValue.firstNameProperty());
+                childLastNameField.textProperty().bindBidirectional(newValue.lastNameProperty());
+                childDateField.valueProperty().bindBidirectional(newValue.dateOfBirthProperty());
+                childBirthplaceField.textProperty().bindBidirectional(newValue.placeOfBirthProperty());
+                childJMBGField.textProperty().bindBidirectional(newValue.jmbgProperty());
+                childAddressField.textProperty().bindBidirectional(newValue.addressProperty());
+                childGenderChoiceBox.valueProperty().bindBidirectional(newValue.genderProperty());
+                if (newValue.getFirstParent() != null) {
+                    childParentTelephoneField.setText(newValue.getFirstParent().getTelephone());
+                    childParentNameField.setText(newValue.getFirstParent().toString());
+                }
+            }
+        });
+
+        teachersListView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (oldValue != null) {
+                teacherFirstNameField.textProperty().unbindBidirectional(oldValue.firstNameProperty());
+                teacherLastNameField.textProperty().unbindBidirectional(oldValue.lastNameProperty());
+                teacherDateField.valueProperty().unbindBidirectional(oldValue.dateOfBirthProperty());
+                teacherTelephoneField.textProperty().unbindBidirectional(oldValue.telephoneProperty());
+                teacherBirthplaceField.textProperty().unbindBidirectional(oldValue.placeOfBirthProperty());
+                teacherJMBGField.textProperty().unbindBidirectional(oldValue.jmbgProperty());
+                teacherAddressField.textProperty().unbindBidirectional(oldValue.addressProperty());
+                teacherEmailField.textProperty().unbindBidirectional(oldValue.emailProperty());
+                teacherGenderChoiceBox.valueProperty().unbindBidirectional(oldValue.genderProperty());
+            }
+            if (newValue == null) {
+                teacherFirstNameField.setText("");
+                teacherLastNameField.setText("");
+                teacherDateField.setValue(LocalDate.now());
+                teacherTelephoneField.setText("");
+                teacherBirthplaceField.setText("");
+                teacherJMBGField.setText("");
+                teacherAddressField.setText("");
+                teacherEmailField.setText("");
+                teacherGenderChoiceBox.getSelectionModel().selectFirst();
+            } else {
+                teacherFirstNameField.textProperty().bindBidirectional(newValue.firstNameProperty());
+                teacherLastNameField.textProperty().bindBidirectional(newValue.lastNameProperty());
+                teacherDateField.valueProperty().bindBidirectional(newValue.dateOfBirthProperty());
+                teacherTelephoneField.textProperty().bindBidirectional(newValue.telephoneProperty());
+                teacherBirthplaceField.textProperty().bindBidirectional(newValue.placeOfBirthProperty());
+                teacherJMBGField.textProperty().bindBidirectional(newValue.jmbgProperty());
+                teacherAddressField.textProperty().bindBidirectional(newValue.addressProperty());
+                teacherEmailField.textProperty().bindBidirectional(newValue.emailProperty());
+                teacherGenderChoiceBox.valueProperty().bindBidirectional(newValue.genderProperty());
+            }
+        });
 
     }
 
