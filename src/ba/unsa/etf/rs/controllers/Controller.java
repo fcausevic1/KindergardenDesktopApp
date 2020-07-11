@@ -9,9 +9,14 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -130,6 +135,9 @@ public class Controller implements Initializable {
             }
         });
 
+        childFirstNameField.textProperty().addListener((observableValue, oldValue, newValue) -> childrenListView.refresh());
+        childLastNameField.textProperty().addListener((observableValue, oldValue, newValue) -> childrenListView.refresh());
+
         teachersListView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             if (oldValue != null) {
                 teacherFirstNameField.textProperty().unbindBidirectional(oldValue.firstNameProperty());
@@ -203,5 +211,27 @@ public class Controller implements Initializable {
     }
 
     public void onActivity(ActionEvent actionEvent) {
+        if (childrenListView.getSelectionModel().getSelectedItem() == null) return;
+        Child selectedChild = childrenListView.getSelectionModel().getSelectedItem();
+        Stage stage = new Stage();
+        javafx.scene.Parent root;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/activity.fxml"));
+            ActivityController activityController = new ActivityController(selectedChild, teachers);
+            loader.setController(activityController);
+            root = loader.load();
+            stage.setTitle("Activities");
+            stage.setScene(new Scene(root));
+            stage.setMinWidth(600);
+            stage.setMinHeight(400);
+            stage.initOwner(childrenListView.getScene().getWindow());
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.show();
+            stage.setOnHiding(event -> {
+
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
