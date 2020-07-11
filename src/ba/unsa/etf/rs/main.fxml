@@ -23,9 +23,9 @@
                     </padding>
                     <TableView fx:id="gradesTableView" GridPane.hgrow="SOMETIMES" GridPane.rowSpan="2147483647" GridPane.vgrow="SOMETIMES">
                         <columns>
-                            <TableColumn prefWidth="75.0" text="Grade" />
-                            <TableColumn prefWidth="75.0" text="Teacher" />
-                            <TableColumn prefWidth="75.0" text="Children" />
+                            <TableColumn fx:id="gradeColumn" minWidth="50.0" prefWidth="150.0" text="Grade"/>
+                            <TableColumn fx:id="teacherColumn" minWidth="50.0" prefWidth="150.0" text="Teacher"/>
+                            <TableColumn fx:id="childrenColumn" minWidth="50.0" prefWidth="75.0" text="Children"/>
                         </columns>
                     </TableView>
                     <Button mnemonicParsing="false" onAction="#onAddGrade" prefHeight="25.0" prefWidth="125.0" text="Add Grade" GridPane.columnIndex="1" />
@@ -45,10 +45,10 @@
                         <RowConstraints vgrow="NEVER" />
                         <RowConstraints minHeight="10.0" vgrow="NEVER" />
                         <RowConstraints vgrow="NEVER" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS"/>
                     </rowConstraints>
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308"/>
                         <ColumnConstraints hgrow="ALWAYS" maxWidth="-Infinity" minWidth="125.0" prefWidth="125.0"/>
                         <ColumnConstraints hgrow="ALWAYS" maxWidth="-Infinity" minWidth="200.0" prefWidth="200.0"/>
                     </columnConstraints>
@@ -134,7 +134,8 @@
                     <DatePicker fx:id="childDateField" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                     <TextField fx:id="childAddressField" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                     <TextField fx:id="childBirthplaceField" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                    <ChoiceBox fx:id="childGenderField" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                    <ChoiceBox fx:id="childGenderChoiceBox" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="2"
+                               GridPane.rowIndex="7"/>
                     <TextField fx:id="childJMBGField" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
                     <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="9">
                         <Button mnemonicParsing="false" onAction="#onAddChild" prefHeight="25.0" prefWidth="110.0" text="Add Child" />
