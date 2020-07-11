@@ -94,6 +94,6 @@ public class Activity {
 
     @Override
     public String toString() {
-        return super.toString();
+        return getAssignment();
     }
 }
