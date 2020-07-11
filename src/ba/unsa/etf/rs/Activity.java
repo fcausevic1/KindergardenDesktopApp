@@ -6,10 +6,10 @@ import javafx.beans.property.SimpleStringProperty;
 import java.time.LocalDate;
 
 public class Activity {
+    private final SimpleObjectProperty<User> teacher;
     private final SimpleStringProperty description, assignment, teacherReview;
     private final SimpleObjectProperty<LocalDate> dateOfLecture;
     int id;
-    private User teacher;
 
     public Activity() {
         this.id = -1;
@@ -17,6 +17,7 @@ public class Activity {
         this.assignment = new SimpleStringProperty("");
         this.teacherReview = new SimpleStringProperty("");
         this.dateOfLecture = new SimpleObjectProperty<>(LocalDate.now());
+        this.teacher = new SimpleObjectProperty<>();
     }
 
     public Activity(int id, String description, String assignment, String teacherReview, LocalDate dateOfLecture, User teacher) {
@@ -25,7 +26,7 @@ public class Activity {
         this.assignment = new SimpleStringProperty(assignment);
         this.teacherReview = new SimpleStringProperty(teacherReview);
         this.dateOfLecture = new SimpleObjectProperty<>(dateOfLecture);
-        this.teacher = teacher;
+        this.teacher = new SimpleObjectProperty<>(teacher);
     }
 
     public int getId() {
@@ -85,11 +86,15 @@ public class Activity {
     }
 
     public User getTeacher() {
-        return teacher;
+        return teacher.get();
     }
 
     public void setTeacher(User teacher) {
-        this.teacher = teacher;
+        this.teacher.set(teacher);
+    }
+
+    public SimpleObjectProperty<User> teacherProperty() {
+        return teacher;
     }
 
     @Override
