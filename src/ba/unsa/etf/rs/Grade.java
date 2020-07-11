@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Grade {
     private final SimpleStringProperty name;
-    private final SimpleObjectProperty<User> teacher;
+    private final SimpleObjectProperty<Person> teacher;
     private ArrayList<Child> children;
 
     public Grade() {
@@ -16,7 +16,7 @@ public class Grade {
         this.children = new ArrayList<>();
     }
 
-    public Grade(String name, User teacher, ArrayList<Child> children) {
+    public Grade(String name, Person teacher, ArrayList<Child> children) {
         this.name = new SimpleStringProperty(name);
         this.teacher = new SimpleObjectProperty<>(teacher);
         this.children = children;
@@ -34,15 +34,15 @@ public class Grade {
         return name;
     }
 
-    public User getTeacher() {
+    public Person getTeacher() {
         return teacher.get();
     }
 
-    public void setTeacher(User teacher) {
+    public void setTeacher(Person teacher) {
         this.teacher.set(teacher);
     }
 
-    public SimpleObjectProperty<User> teacherProperty() {
+    public SimpleObjectProperty<Person> teacherProperty() {
         return teacher;
     }
 

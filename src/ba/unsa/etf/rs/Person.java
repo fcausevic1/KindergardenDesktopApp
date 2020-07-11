@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 import java.time.LocalDate;
 
-public class User {
+public class Person {
     int id;
     private final SimpleStringProperty firstName;
     private final SimpleStringProperty lastName;
@@ -15,7 +15,7 @@ public class User {
     private final SimpleObjectProperty<LocalDate> dateOfBirth;
     private Gender gender;
 
-    public User() {
+    public Person() {
         this.id = -1;
         this.firstName = new SimpleStringProperty("");
         this.lastName = new SimpleStringProperty("");
@@ -25,7 +25,7 @@ public class User {
         this.dateOfBirth = new SimpleObjectProperty<>(LocalDate.now());
     }
 
-    public User(int id, String firstName, String lastName, String address, String jmbg, String placeOfBirth, LocalDate dateOfBirth, Gender gender) {
+    public Person(int id, String firstName, String lastName, String address, String jmbg, String placeOfBirth, LocalDate dateOfBirth, Gender gender) {
         this.id = id;
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
