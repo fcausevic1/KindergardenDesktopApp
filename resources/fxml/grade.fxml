@@ -23,8 +23,8 @@
         <RowConstraints vgrow="NEVER"/>
         <RowConstraints vgrow="NEVER"/>
     </rowConstraints>
-    <MultiSelectList fx:id="childrenList" multiSelect="true" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2"
-                     GridPane.rowSpan="2"/>
+    <MultiSelectList fx:id="childrenList" multiSelect="true" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1"
+                     GridPane.rowSpan="3"/>
     <Label text="Multiselect with shift-click or ctrl-click" textFill="#727272" GridPane.columnSpan="2147483647"
            GridPane.rowIndex="4">
         <font>
@@ -35,7 +35,7 @@
     <Button mnemonicParsing="false" onAction="#onAddToGrade" prefHeight="25.0" prefWidth="125.0" text="Add to Grade"
             GridPane.halignment="CENTER" GridPane.rowIndex="5"/>
     <MultiSelectList fx:id="gradeList" layoutX="20.0" layoutY="46.0" multiSelect="true" prefHeight="200.0"
-                     prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="2"/>
+                     prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="3"/>
     <Label text="Children in this grade" GridPane.columnIndex="1"/>
     <Button mnemonicParsing="false" onAction="#onRemoveFromGrade" text="Remove from Grade" GridPane.columnIndex="1"
             GridPane.halignment="CENTER" GridPane.rowIndex="5"/>
