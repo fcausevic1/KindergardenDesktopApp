@@ -1,9 +1,10 @@
 package ba.unsa.etf.rs.controllers;
 
+import ba.unsa.etf.rs.DaycareDAO;
+import ba.unsa.etf.rs.DaycareDAOBase;
 import ba.unsa.etf.rs.enums.Gender;
 import ba.unsa.etf.rs.models.Child;
 import ba.unsa.etf.rs.models.Grade;
-import ba.unsa.etf.rs.models.Parent;
 import ba.unsa.etf.rs.models.Teacher;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -51,6 +52,14 @@ public class Controller implements Initializable {
     public ListView<Child> childrenListView;
     public ChoiceBox<Gender> childGenderChoiceBox;
     public TextField teacherEmailField;
+    private final DaycareDAO daycareDAO;
+
+    public Controller() {
+        daycareDAO = DaycareDAOBase.getInstance();
+        grades.setAll(daycareDAO.getGrades());
+        children.setAll(daycareDAO.getChildren());
+        teachers.setAll(daycareDAO.getTeachers());
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -71,31 +80,6 @@ public class Controller implements Initializable {
         //Parent fields
         childParentNameField.setEditable(false);
         childParentTelephoneField.setEditable(false);
-
-        //Test items
-        Teacher teacher1 = new Teacher();
-        teacher1.setFirstName("Teacher");
-        teacher1.setLastName("One");
-        teachers.add(teacher1);
-        Teacher teacher2 = new Teacher();
-        teacher2.setFirstName("Teacher");
-        teacher2.setLastName("Two");
-        teachers.add(teacher2);
-        Parent parent1 = new Parent();
-        parent1.setFirstName("Parent");
-        parent1.setLastName("One");
-        parent1.setTelephone("000/000-000");
-        Child child1 = new Child();
-        child1.setFirstName("Child");
-        child1.setLastName("One");
-        child1.setFirstParent(parent1);
-        child1.setGender(Gender.FEMALE);
-        children.add(child1);
-        Grade grade1 = new Grade();
-        grade1.setName("Grade One");
-        grade1.setTeacher(teacher1);
-        grade1.getChildren().add(child1);
-        grades.add(grade1);
 
         //Bindings
         childrenListView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
