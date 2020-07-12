@@ -1,3 +1,5 @@
+package ba.unsa.etf.rs;
+
 import ba.unsa.etf.rs.models.Child;
 import ba.unsa.etf.rs.models.Grade;
 import ba.unsa.etf.rs.models.Parent;
@@ -52,5 +54,5 @@ public interface DaycareDAO {
 
     int getNextGradeID();
 
-    ArrayList<Child> getChildren(Grade grade);
+    ArrayList<Child> getChildren(int id);
 }
