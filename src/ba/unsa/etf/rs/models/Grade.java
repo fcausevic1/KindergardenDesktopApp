@@ -8,17 +8,20 @@ import javafx.collections.ObservableList;
 import java.util.ArrayList;
 
 public class Grade {
+    int id;
     private final SimpleStringProperty name;
     private final SimpleObjectProperty<Teacher> teacher;
     private ObservableList<Child> children;
 
     public Grade() {
+        this.id = -1;
         this.name = new SimpleStringProperty("");
         this.teacher = new SimpleObjectProperty<>();
         this.children = FXCollections.observableArrayList();
     }
 
-    public Grade(String name, Teacher teacher, ArrayList<Child> children) {
+    public Grade(int id, String name, Teacher teacher, ArrayList<Child> children) {
+        this.id = id;
         this.name = new SimpleStringProperty(name);
         this.teacher = new SimpleObjectProperty<>(teacher);
         this.children = FXCollections.observableArrayList(children);
@@ -54,6 +57,14 @@ public class Grade {
 
     public void setChildren(ObservableList<Child> children) {
         this.children = children;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
