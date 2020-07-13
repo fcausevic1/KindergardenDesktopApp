@@ -1,6 +1,5 @@
 package ba.unsa.etf.rs;
 
-import ba.unsa.etf.rs.controllers.Controller;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,9 +14,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
-        loader.setController(new Controller());
-        Parent root = loader.load();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
         primaryStage.setTitle("Daycare manager");
         primaryStage.setScene(new Scene(root));
         primaryStage.setMinWidth(800);

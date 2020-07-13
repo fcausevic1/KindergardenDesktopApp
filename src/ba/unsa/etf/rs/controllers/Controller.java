@@ -52,17 +52,14 @@ public class Controller implements Initializable {
     public ListView<Child> childrenListView;
     public ChoiceBox<Gender> childGenderChoiceBox;
     public TextField teacherEmailField;
-    private final DaycareDAO daycareDAO;
-
-    public Controller() {
-        daycareDAO = DaycareDAOBase.getInstance();
-        grades.setAll(daycareDAO.getGrades());
-        children.setAll(daycareDAO.getChildren());
-        teachers.setAll(daycareDAO.getTeachers());
-    }
+    private final DaycareDAO daycareDAO = DaycareDAOBase.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        grades.setAll(daycareDAO.getGrades());
+        teachers.setAll(daycareDAO.getTeachers());
+        children.setAll(daycareDAO.getChildren());
+
         //ChoiceBox initialization
         teacherGenderChoiceBox.setItems(genders);
         childGenderChoiceBox.setItems(genders);
@@ -182,6 +179,9 @@ public class Controller implements Initializable {
                 Grade grade = gradeController.getGrade();
                 if (grade != null) {
                     grades.add(grade);
+                    daycareDAO.addGrade(grade);
+                    daycareDAO.updateGradeChildren(grade, gradeController.getGradeChildren());
+                    daycareDAO.removeGradeChildren(gradeController.getChildren());
                 }
             });
         } catch (IOException e) {
@@ -215,6 +215,9 @@ public class Controller implements Initializable {
                     gradesTableView.getSelectionModel().getSelectedItem().setName(grade.getName());
                     gradesTableView.getSelectionModel().getSelectedItem().setTeacher(grade.getTeacher());
                     gradesTableView.refresh();
+                    daycareDAO.updateGrade(grade);
+                    daycareDAO.updateGradeChildren(grade, gradeController.getGradeChildren());
+                    daycareDAO.removeGradeChildren(gradeController.getChildren());
                 }
             });
         } catch (IOException e) {
@@ -223,25 +226,31 @@ public class Controller implements Initializable {
     }
 
     public void onDeleteGrade(ActionEvent actionEvent) {
+        daycareDAO.deleteGrade(gradesTableView.getSelectionModel().getSelectedItem());
+        daycareDAO.removeGradeChildren(gradesTableView.getSelectionModel().getSelectedItem().getChildren());
         grades.removeAll(gradesTableView.getSelectionModel().getSelectedItem());
     }
 
     public void onAddTeacher(ActionEvent actionEvent) {
         teachers.add(new Teacher());
         teachersListView.getSelectionModel().selectLast();
+        daycareDAO.addTeacher(teachersListView.getSelectionModel().getSelectedItem());
     }
 
     public void onDeleteTeacher(ActionEvent actionEvent) {
+        daycareDAO.deleteTeacher(teachersListView.getSelectionModel().getSelectedItem());
         teachers.removeAll(teachersListView.getSelectionModel().getSelectedItem());
     }
 
     public void onAddChild(ActionEvent actionEvent) {
         children.add(new Child());
         childrenListView.getSelectionModel().selectLast();
+        daycareDAO.addChild(childrenListView.getSelectionModel().getSelectedItem());
     }
 
     public void onDeleteChild(ActionEvent actionEvent) {
-        children.removeAll(childrenListView.getSelectionModel().getSelectedItems());
+        daycareDAO.deleteChild(childrenListView.getSelectionModel().getSelectedItem());
+        children.removeAll(childrenListView.getSelectionModel().getSelectedItem());
     }
 
     public void onParentDetails(ActionEvent actionEvent) {
@@ -267,6 +276,8 @@ public class Controller implements Initializable {
                 if (selectedChild.getFirstParent() != null) {
                     childParentTelephoneField.setText(selectedChild.getFirstParent().getTelephone());
                     childParentNameField.setText(selectedChild.getFirstParent().toString());
+                    daycareDAO.updateParent(selectedChild.getFirstParent());
+                    daycareDAO.updateParent(selectedChild.getSecondParent());
                 }
             });
         } catch (IOException e) {
@@ -300,17 +311,7 @@ public class Controller implements Initializable {
     }
 
     ObservableList<Child> getChildrenWithoutClass() {
-        ObservableList<Child> newList = FXCollections.observableArrayList();
-        for (Child child : children) {
-            boolean contains = false;
-            for (Grade grade : grades) {
-                if (grade.getChildren().contains(child)) {
-                    contains = true;
-                    break;
-                }
-            }
-            if (!contains) newList.add(child);
-        }
-        return newList;
+        System.out.println(daycareDAO.getChildrenWithoutGrade().size());
+        return FXCollections.observableArrayList(daycareDAO.getChildrenWithoutGrade());
     }
 }

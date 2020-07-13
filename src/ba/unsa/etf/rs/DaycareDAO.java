@@ -4,6 +4,7 @@ import ba.unsa.etf.rs.models.Child;
 import ba.unsa.etf.rs.models.Grade;
 import ba.unsa.etf.rs.models.Parent;
 import ba.unsa.etf.rs.models.Teacher;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
@@ -17,8 +18,6 @@ public interface DaycareDAO {
     Child getChild(int id);
 
     ArrayList<Child> getChildren();
-
-    int getNextChildID();
 
     void addTeacher(Teacher teacher);
 
@@ -36,11 +35,7 @@ public interface DaycareDAO {
 
     Parent getParent(int id);
 
-    int getNextParentID();
-
     ArrayList<Teacher> getTeachers();
-
-    int getNextTeacherID();
 
     void addGrade(Grade grade);
 
@@ -55,4 +50,10 @@ public interface DaycareDAO {
     int getNextGradeID();
 
     ArrayList<Child> getChildren(int id);
+
+    ArrayList<Child> getChildrenWithoutGrade();
+
+    void updateGradeChildren(Grade grade, ObservableList<Child> children);
+
+    void removeGradeChildren(ObservableList<Child> children);
 }

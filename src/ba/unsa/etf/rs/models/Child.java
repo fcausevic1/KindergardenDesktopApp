@@ -15,8 +15,8 @@ public class Child extends Person {
     public Child() {
         super();
         this.activities = FXCollections.observableArrayList();
-        this.firstParent = new SimpleObjectProperty<>();
-        this.secondParent = new SimpleObjectProperty<>();
+        this.firstParent = new SimpleObjectProperty<>(new Parent());
+        this.secondParent = new SimpleObjectProperty<>(new Parent());
     }
 
     public Child(int id, String firstName, String lastName, String telephone, String address, String jmbg, String placeOfBirth, LocalDate dateOfBirth, Gender gender, Parent firstParent, Parent secondParent, ArrayList<Activity> activities) {

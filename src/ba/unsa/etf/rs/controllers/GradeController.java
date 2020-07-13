@@ -35,6 +35,14 @@ public class GradeController implements Initializable {
         return grade;
     }
 
+    public ObservableList<Child> getChildren() {
+        return children;
+    }
+
+    public ObservableList<Child> getGradeChildren() {
+        return gradeChildren;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         teacherChoiceBox.setItems(teachers);
