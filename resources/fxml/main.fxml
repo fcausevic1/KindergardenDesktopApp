@@ -3,9 +3,8 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity"
-            prefHeight="550.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0"
+            prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="ba.unsa.etf.rs.controllers.Controller">
     <center>
         <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
@@ -40,7 +39,7 @@
                             text="Delete Grade" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
                 </GridPane>
             </Tab>
-            <Tab text="Teachers">
+            <Tab fx:id="teachersTab" text="Teachers">
                 <GridPane hgap="10.0" vgap="10.0">
                     <rowConstraints>
                         <RowConstraints vgrow="NEVER"/>
@@ -93,8 +92,8 @@
                                GridPane.rowIndex="8"/>
                     <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="2147483647"
                           GridPane.rowIndex="9">
-                        <Button mnemonicParsing="false" onAction="#onAddTeacher" prefHeight="25.0" prefWidth="125.0"
-                                text="Add Teacher"/>
+                        <Button fx:id="addTeacherBtn" mnemonicParsing="false" onAction="#onAddTeacher" prefHeight="25.0"
+                                prefWidth="125.0" text="Add Teacher"/>
                         <Button mnemonicParsing="false" onAction="#onDeleteTeacher" prefHeight="25.0" prefWidth="125.0"
                                 text="Delete Teacher">
                             <HBox.margin>
@@ -106,7 +105,7 @@
 
                 </GridPane>
             </Tab>
-            <Tab text="Children">
+            <Tab fx:id="childrenTab" text="Children">
                 <GridPane hgap="10.0" vgap="10.0">
                     <rowConstraints>
                         <RowConstraints vgrow="NEVER"/>
@@ -159,8 +158,8 @@
                                GridPane.rowIndex="8"/>
                     <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="2147483647"
                           GridPane.rowIndex="9">
-                        <Button mnemonicParsing="false" onAction="#onAddChild" prefHeight="25.0" prefWidth="110.0"
-                                text="Add Child"/>
+                        <Button fx:id="addChildBtn" mnemonicParsing="false" onAction="#onAddChild" prefHeight="25.0"
+                                prefWidth="110.0" text="Add Child"/>
                         <Button mnemonicParsing="false" onAction="#onDeleteChild" prefHeight="25.0" prefWidth="110.0"
                                 text="Delete Child">
                             <HBox.margin>
@@ -170,8 +169,8 @@
                     </HBox>
                     <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="2147483647"
                           GridPane.rowIndex="10">
-                        <Button mnemonicParsing="false" onAction="#onParentDetails" prefHeight="25.0" prefWidth="110.0"
-                                text="Parent Details"/>
+                        <Button fx:id="parentDetailsBtn" mnemonicParsing="false" onAction="#onParentDetails"
+                                prefHeight="25.0" prefWidth="110.0" text="Parent Details"/>
                         <Button mnemonicParsing="false" onAction="#onActivity" prefHeight="25.0" prefWidth="110.0"
                                 text="Activity">
                             <HBox.margin>

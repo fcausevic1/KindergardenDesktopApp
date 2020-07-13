@@ -52,7 +52,7 @@
     <TextField fx:id="JMBGField" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
     <HBox alignment="CENTER" GridPane.columnSpan="2147483647" GridPane.rowIndex="10">
         <Button mnemonicParsing="false" onAction="#onSaveChanges" prefHeight="25.0" prefWidth="125.0"
-                text="Save and Close"/>
+                text="Save and Close" fx:id="saveChangesBtn"/>
     </HBox>
     <Label text="Parent:"/>
     <ChoiceBox fx:id="parentChoiceBox" prefWidth="220.0" GridPane.columnIndex="1"/>
