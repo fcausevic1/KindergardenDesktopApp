@@ -17,7 +17,6 @@
         <RowConstraints vgrow="NEVER"/>
         <RowConstraints vgrow="NEVER"/>
         <RowConstraints vgrow="NEVER"/>
-        <RowConstraints vgrow="NEVER"/>
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER"/>
         <RowConstraints vgrow="NEVER"/>
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
@@ -28,15 +27,12 @@
     <ListView fx:id="activityListView" prefHeight="200.0" prefWidth="200.0" GridPane.rowSpan="2147483647"/>
     <TextField fx:id="assignmentField" prefHeight="25.0" prefWidth="125.0" GridPane.columnIndex="2"/>
     <TextArea fx:id="descriptionField" prefHeight="100.0" prefWidth="125.0" GridPane.columnIndex="2"
-              GridPane.rowIndex="3"/>
-    <TextArea fx:id="reviewField" prefHeight="100.0" prefWidth="125.0" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+              GridPane.rowIndex="2"/>
+    <TextArea fx:id="reviewField" prefHeight="100.0" prefWidth="125.0" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
     <Label text="Assignment:" GridPane.columnIndex="1"/>
-    <Label text="Description:" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-    <Label text="Teacher Review:" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-    <Label text="Teacher:" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-    <ChoiceBox fx:id="teacherChoiceBox" prefHeight="25.0" prefWidth="220.0" GridPane.columnIndex="2"
-               GridPane.rowIndex="1"/>
-    <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="5"
+    <Label text="Description:" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    <Label text="Teacher Review:" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+    <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="4"
           GridPane.vgrow="NEVER">
         <Button mnemonicParsing="false" onAction="#onAddActivity" prefHeight="25.0" prefWidth="125.0"
                 text="Add Activity"/>
@@ -48,7 +44,7 @@
         </Button>
     </HBox>
     <HBox alignment="CENTER" layoutX="248.0" layoutY="298.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647"
-          GridPane.rowIndex="6">
+          GridPane.rowIndex="5">
         <Button mnemonicParsing="false" onAction="#onSaveChanges" prefHeight="25.0" prefWidth="125.0"
                 text="Save Changes"/>
         <Button mnemonicParsing="false" onAction="#onCancel" prefHeight="25.0" prefWidth="125.0" text="Cancel">
@@ -57,6 +53,6 @@
             </HBox.margin>
         </Button>
     </HBox>
-    <Label text="Assignment Date:" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-    <DatePicker fx:id="assignmentDate" prefWidth="220.0" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+    <Label text="Assignment Date:" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <DatePicker fx:id="assignmentDate" prefWidth="220.0" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
 </GridPane>

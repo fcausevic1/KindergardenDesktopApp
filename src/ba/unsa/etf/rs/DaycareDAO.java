@@ -1,9 +1,6 @@
 package ba.unsa.etf.rs;
 
-import ba.unsa.etf.rs.models.Child;
-import ba.unsa.etf.rs.models.Grade;
-import ba.unsa.etf.rs.models.Parent;
-import ba.unsa.etf.rs.models.Teacher;
+import ba.unsa.etf.rs.models.*;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
@@ -56,4 +53,16 @@ public interface DaycareDAO {
     void updateGradeChildren(Grade grade, ObservableList<Child> children);
 
     void removeGradeChildren(ObservableList<Child> children);
+
+    void addActivity(Child child, Activity activity);
+
+    void updateActivity(Activity activity);
+
+    void deleteActivity(Activity activity);
+
+    Activity getActivity(int id);
+
+    ArrayList<Activity> getActivities(int id);
+
+    int getNextActivityID();
 }

@@ -43,6 +43,8 @@ public class DaycareDAOBase implements DaycareDAO {
     private PreparedStatement deletePersonStatement;
     private PreparedStatement getNextPersonIDStatement;
     private PreparedStatement addActivityStatement;
+    private PreparedStatement getActivityStatement;
+    private PreparedStatement getActivitiesStatement;
     private PreparedStatement updateActivityStatement;
     private PreparedStatement deleteActivityStatement;
     private PreparedStatement getNextActivityIDStatement;
@@ -92,8 +94,10 @@ public class DaycareDAOBase implements DaycareDAO {
             deletePersonStatement = connection.prepareStatement("DELETE FROM persons WHERE id=?");
             getNextPersonIDStatement = connection.prepareStatement("SELECT MAX(id)+1 FROM persons");
 
-            addActivityStatement = connection.prepareStatement("INSERT INTO activities VALUES (?, ?, ?, ?, ?, ?, ?)");
-            updateActivityStatement = connection.prepareStatement("UPDATE activities SET assignment=?, description=?, review=?, lecture_date=?, teacher_id=? WHERE id=?");
+            addActivityStatement = connection.prepareStatement("INSERT INTO activities VALUES (?, ?, ?, ?, ?, ?)");
+            getActivityStatement = connection.prepareStatement("SELECT * FROM activities WHERE id=?");
+            getActivitiesStatement = connection.prepareStatement("SELECT * FROM activities WHERE child_id=?");
+            updateActivityStatement = connection.prepareStatement("UPDATE activities SET assignment=?, description=?, review=?, lecture_date=? WHERE id=?");
             deleteActivityStatement = connection.prepareStatement("DELETE FROM activities WHERE id=?");
             getNextActivityIDStatement = connection.prepareStatement("SELECT MAX(id)+1 FROM activities");
 
@@ -179,8 +183,8 @@ public class DaycareDAOBase implements DaycareDAO {
         return new Grade(rs.getInt(1), rs.getString(2), teacher, children);
     }
 
-    private Activity getActivityFromResultSet(ResultSet rs, Teacher teacher) throws SQLException {
-        return new Activity(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5).toLocalDate(), teacher);
+    private Activity getActivityFromResultSet(ResultSet rs) throws SQLException {
+        return new Activity(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5).toLocalDate());
     }
 
     private Child getChildFromResultSet(ResultSet rs, Parent firstParent, Parent secondParent, ArrayList<Activity> activities) throws SQLException {
@@ -195,7 +199,7 @@ public class DaycareDAOBase implements DaycareDAO {
         child.setGender(rs.getInt(8) == 0 ? Gender.MALE : Gender.FEMALE);
         child.setFirstParent(firstParent);
         child.setSecondParent(secondParent);
-        child.setActivities(FXCollections.observableArrayList()); // TODO: ACT
+        child.setActivities(FXCollections.observableArrayList(getActivities(child.getId())));
         return child;
     }
 
@@ -259,7 +263,7 @@ public class DaycareDAOBase implements DaycareDAO {
             if (!rs.next()) return null;
             Parent firstParent = getParent(rs.getInt(9));
             Parent secondParent = getParent(rs.getInt(10));
-            return getChildFromResultSet(rs, firstParent, secondParent, null); // TODO: Child Activity
+            return getChildFromResultSet(rs, firstParent, secondParent, getActivities(id));
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -274,7 +278,7 @@ public class DaycareDAOBase implements DaycareDAO {
             while (rs.next()) {
                 Parent firstParent = getParent(rs.getInt(9));
                 Parent secondParent = getParent(rs.getInt(10));
-                Child child = getChildFromResultSet(rs, firstParent, secondParent, null); // TODO: Child Activity
+                Child child = getChildFromResultSet(rs, firstParent, secondParent, getActivities(rs.getInt(1)));
                 children.add(child);
             }
         } catch (SQLException e) {
@@ -535,7 +539,7 @@ public class DaycareDAOBase implements DaycareDAO {
             while (rs.next()) {
                 Parent firstParent = getParent(rs.getInt(9));
                 Parent secondParent = getParent(rs.getInt(10));
-                Child child = getChildFromResultSet(rs, firstParent, secondParent, null); // TODO: Child Activity
+                Child child = getChildFromResultSet(rs, firstParent, secondParent, getActivities(rs.getInt(1)));
                 children.add(child);
             }
         } catch (SQLException e) {
@@ -552,7 +556,7 @@ public class DaycareDAOBase implements DaycareDAO {
             while (rs.next()) {
                 Parent firstParent = getParent(rs.getInt(9));
                 Parent secondParent = getParent(rs.getInt(10));
-                Child child = getChildFromResultSet(rs, firstParent, secondParent, null); // TODO: Child Activity
+                Child child = getChildFromResultSet(rs, firstParent, secondParent, getActivities(rs.getInt(1)));
                 children.add(child);
             }
         } catch (SQLException e) {
@@ -584,5 +588,93 @@ public class DaycareDAOBase implements DaycareDAO {
                 throwables.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void addActivity(Child child, Activity activity) {
+        try {
+            ResultSet rs = getNextActivityIDStatement.executeQuery();
+            int id = 1;
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+            addActivityStatement.setInt(1, id);
+            addActivityStatement.setString(2, activity.getAssignment());
+            addActivityStatement.setString(3, activity.getDescription());
+            addActivityStatement.setString(4, activity.getTeacherReview());
+            addActivityStatement.setDate(5, Date.valueOf(activity.getDateOfLecture()));
+            addActivityStatement.setInt(6, child.getId());
+            addActivityStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateActivity(Activity activity) {
+        try {
+            updateActivityStatement.setString(1, activity.getAssignment());
+            updateActivityStatement.setString(2, activity.getDescription());
+            updateActivityStatement.setString(3, activity.getTeacherReview());
+            updateActivityStatement.setDate(4, Date.valueOf(activity.getDateOfLecture()));
+            updateActivityStatement.setInt(5, activity.getId());
+            updateActivityStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteActivity(Activity activity) {
+        try {
+            deleteActivityStatement.setInt(1, activity.getId());
+            deleteActivityStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public Activity getActivity(int id) {
+        try {
+            getActivityStatement.setInt(1, id);
+            ResultSet rs = getActivityStatement.executeQuery();
+            if (!rs.next()) return null;
+            return getActivityFromResultSet(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ArrayList<Activity> getActivities(int id) {
+        ArrayList<Activity> activities = new ArrayList<>();
+        try {
+            getActivitiesStatement.setInt(1, id);
+            ResultSet rs = getActivitiesStatement.executeQuery();
+            while (rs.next()) {
+                Activity activity = getActivity(rs.getInt(1));
+                activities.add(activity);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return activities;
+    }
+
+    @Override
+    public int getNextActivityID() {
+        ResultSet rs;
+        int id = 1;
+        try {
+            rs = getNextActivityIDStatement.executeQuery();
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
     }
 }

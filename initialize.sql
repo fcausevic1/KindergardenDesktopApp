@@ -46,9 +46,7 @@ CREATE TABLE IF NOT EXISTS `activities` (
     description TEXT,
     review TEXT,
     lecture_date DATE,
-    teacher_id INTEGER,
     child_id INTEGER,
-    FOREIGN KEY (teacher_id) REFERENCES teachers(id),
     FOREIGN KEY (child_id) REFERENCES children(id)
 );
 INSERT INTO persons VALUES (1, "Mujo", "Mujic", "Zmaja od Bosne", "12345678901", "Sarajevo", 321532400000, 0);

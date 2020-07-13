@@ -6,27 +6,24 @@ import javafx.beans.property.SimpleStringProperty;
 import java.time.LocalDate;
 
 public class Activity {
-    private final SimpleObjectProperty<Teacher> teacher;
     private final SimpleStringProperty description, assignment, teacherReview;
     private final SimpleObjectProperty<LocalDate> dateOfLecture;
     int id;
 
     public Activity() {
-        this.id = -1;
+        this.id = 1;
         this.description = new SimpleStringProperty("");
         this.assignment = new SimpleStringProperty("");
         this.teacherReview = new SimpleStringProperty("");
         this.dateOfLecture = new SimpleObjectProperty<>(LocalDate.now());
-        this.teacher = new SimpleObjectProperty<>();
     }
 
-    public Activity(int id, String description, String assignment, String teacherReview, LocalDate dateOfLecture, Teacher teacher) {
+    public Activity(int id, String description, String assignment, String teacherReview, LocalDate dateOfLecture) {
         this.id = id;
         this.description = new SimpleStringProperty(description);
         this.assignment = new SimpleStringProperty(assignment);
         this.teacherReview = new SimpleStringProperty(teacherReview);
         this.dateOfLecture = new SimpleObjectProperty<>(dateOfLecture);
-        this.teacher = new SimpleObjectProperty<>(teacher);
     }
 
     public int getId() {
@@ -83,18 +80,6 @@ public class Activity {
 
     public SimpleObjectProperty<LocalDate> dateOfLectureProperty() {
         return dateOfLecture;
-    }
-
-    public Person getTeacher() {
-        return teacher.get();
-    }
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher.set(teacher);
-    }
-
-    public SimpleObjectProperty<Teacher> teacherProperty() {
-        return teacher;
     }
 
     @Override

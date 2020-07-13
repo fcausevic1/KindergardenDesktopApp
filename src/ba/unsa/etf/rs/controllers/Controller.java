@@ -292,7 +292,7 @@ public class Controller implements Initializable {
         javafx.scene.Parent root;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/activity.fxml"));
-            ActivityController activityController = new ActivityController(selectedChild, teachers);
+            ActivityController activityController = new ActivityController(selectedChild, daycareDAO);
             loader.setController(activityController);
             root = loader.load();
             stage.setTitle("Activities");
@@ -303,7 +303,6 @@ public class Controller implements Initializable {
             stage.initModality(Modality.WINDOW_MODAL);
             stage.show();
             stage.setOnHiding(event -> {
-
             });
         } catch (IOException e) {
             e.printStackTrace();
